@@ -2,8 +2,7 @@ const CACHE_NAME = 'pwa-cache-v1';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/manifest.json',
-    '/icon.png' // Ensure this file exists in your repo
+    '/manifest.json'
 ];
 
 self.addEventListener('install', event => {
