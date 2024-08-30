@@ -3,7 +3,7 @@ const urlsToCache = [
     '/',
     '/index.html',
     '/manifest.json',
-    '/icon.png' // Ensure you have an icon.png file or update this path
+    '/icon.png' // Ensure this file exists in your repo
 ];
 
 self.addEventListener('install', event => {
