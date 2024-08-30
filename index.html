@@ -1,26 +1,39 @@
-const CACHE_NAME = 'pwa-cache-v1';
-const urlsToCache = [
-    '/',
-    '/index.html',
-    '/manifest.json',
-    '/icon.png' // Ensure you have an icon.png file or update this path
-];
-
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => {
-                console.log('Opened cache');
-                return cache.addAll(urlsToCache);
-            })
-    );
-});
-
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                return response || fetch(event.request);
-            })
-    );
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#317EFB">
+    <link rel="manifest" href="/manifest.json">
+    <title>PWA Demo</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        h1 {
+            color: #317EFB;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello, PWA!</h1>
+    <p>This is a simple Progressive Web App.</p>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
